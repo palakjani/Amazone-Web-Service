@@ -91,6 +91,80 @@ public class regDAO {
 		return lscity;
 	}
 
+	public static List EditReg(regVO rv) {
+		// TODO Auto-generated method stub
+		List l=null;
+		try
+		{
+			SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
+			
+			Session session=sessionFactory.openSession();
+			
+			Transaction tr=session.beginTransaction();
+			
+			Query w=session.createQuery("from regVO where rid='"+rv.getRid()+"'");
+			
+			l=w.list();
+			
+			tr.commit();
+		}
+		catch(Exception z)
+		{
+			z.printStackTrace();
+		}
+		return l;
+	}
+
+	public static List SearchUser(regVO rv) {
+		// TODO Auto-generated method stub
+		List l = null;
+		try
+		{
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			
+			Session session =sessionFactory.openSession();
+			
+			Transaction tr = session.beginTransaction();
+			
+			Query w=session.createQuery("from regVO ");
+			
+			l=w.list();
+			
+			tr.commit();
+		}
+		catch(Exception z)
+		{
+			z.printStackTrace();
+		}
+		return l;
+	}
+
+	public static void UpdateReg(regVO rv) {
+		// TODO Auto-generated method stub
+		try
+		{
+			SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
+			
+			Session session=sessionFactory.openSession();
+			
+			Transaction tr=session.beginTransaction();
+			
+			session.saveOrUpdate(rv);
+		
+			
+			tr.commit();
+		}
+		catch(Exception z)
+		{
+			z.printStackTrace();
+		}
+	}
+
+	public static void DeleteReg(regVO rv) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 }

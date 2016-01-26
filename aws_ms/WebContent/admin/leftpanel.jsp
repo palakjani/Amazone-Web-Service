@@ -65,7 +65,13 @@
           <h5 class="sidebar-title">Main Menu</h5>
           <ul class="nav nav-pills nav-stacked nav-quirk">
             <li class="nav-parent">
-             <li><a href="userTable.jsp"><span class="badge pull-right"></span><i class="fa fa-suitcase"></i> <span>Manage User</span></a></li>
+            <li class="nav-parent"><a href=""><i class="fa fa-suitcase"></i> <span>Manage User</span></a>            
+             <ul class="children">
+                <li><a href="<%=request.getContextPath()%>/regController?flag=SearchUser">View Registration</a></li>
+                <li><a href="<%=request.getContextPath()%>/loginController?flag=SearchLogin">View Login</a></li>
+              
+              </ul>
+             </li>
           
            <li class="nav-parent"><a href=""><i class="fa fa-suitcase"></i> <span>Manage Category</span></a>
               <ul class="children">

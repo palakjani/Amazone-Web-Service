@@ -239,7 +239,7 @@
                   <div class="row">
                     <div class="col-sm-9 col-sm-offset-3">
                       <button class="btn btn-success btn-quirk btn-wide mr5">Submit</button>
-                      <input type="hidden" name="flag" value="insertInfo">
+                      <input type="hidden" name="flag" value="InsertUser">
                       <button type="reset" class="btn btn-quirk btn-wide btn-default">Reset</button>
                     </div>
                   </div>

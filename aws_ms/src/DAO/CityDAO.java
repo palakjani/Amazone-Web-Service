@@ -125,6 +125,33 @@ public class CityDAO {
 
 
 
+	public List SearchCity(CityVO ctv) {
+		// TODO Auto-generated method stub
+		List l = null;
+		try
+		{
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			
+			Session session =sessionFactory.openSession();
+			
+			Transaction tr = session.beginTransaction();
+			
+			Query w=session.createQuery("from CityVO ");
+			
+			l=w.list();
+			
+			tr.commit();
+		}
+		catch(Exception z)
+		{
+			z.printStackTrace();
+		}
+		return l;
+	
+	}
+
+
+
 	
 
 

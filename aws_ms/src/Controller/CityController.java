@@ -75,7 +75,6 @@ public class CityController extends HttpServlet {
 
 	protected void search (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CityDAO d1=new CityDAO();
-		
 		List ls =new ArrayList();
 		ls=d1.SearchCity(v2);
 		HttpSession session = request.getSession();

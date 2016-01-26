@@ -60,4 +60,73 @@ public class loginDAO {
 		}
 		return ls;
 	}
+
+	public static List SearchLogin(loginVO lv) {
+		// TODO Auto-generated method stub
+		List l = null;
+		try
+		{
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			
+			Session session =sessionFactory.openSession();
+			
+			Transaction tr = session.beginTransaction();
+			
+			Query w=session.createQuery("from loginVO ");
+			
+			l=w.list();
+			
+			tr.commit();
+		}
+		catch(Exception z)
+		{
+			z.printStackTrace();
+		}
+		return l;
+	}
+
+	public static List EditLogin(loginVO lv) {
+		// TODO Auto-generated method stub
+		List l=null;
+		try
+		{
+			SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
+			
+			Session session=sessionFactory.openSession();
+			
+			Transaction tr=session.beginTransaction();
+			
+			Query w=session.createQuery("from loginVO where loginid='"+lv.getLoginid()+"'");
+			
+			l=w.list();
+			
+			tr.commit();
+		}
+		catch(Exception z)
+		{
+			z.printStackTrace();
+		}
+		return l;
+	}
+
+	public static void UpdateLogin(loginVO lv) {
+		// TODO Auto-generated method stub
+		try
+		{
+			SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
+			
+			Session session=sessionFactory.openSession();
+			
+			Transaction tr=session.beginTransaction();
+			
+			session.saveOrUpdate(lv);
+		
+			
+			tr.commit();
+		}
+		catch(Exception z)
+		{
+			z.printStackTrace();
+		}
+	}
 }

@@ -20,7 +20,7 @@
 		</property>
 	
 		
-	
+	<many-to-one class="VO.regVO" name="rv" column="rid"></many-to-one>
 		
 		
 	</class>

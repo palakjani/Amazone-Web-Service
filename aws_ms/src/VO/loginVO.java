@@ -5,6 +5,14 @@ import java.io.Serializable;
 public class loginVO implements Serializable{
 	private int loginid;
 	private String email,password;
+
+	regVO rv=new regVO();
+	public regVO getRv() {
+		return rv;
+	}
+	public void setRv(regVO rv) {
+		this.rv = rv;
+	}
 	
 	public int getLoginid() {
 		return loginid;

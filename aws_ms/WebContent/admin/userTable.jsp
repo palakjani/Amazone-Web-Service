@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+     <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
@@ -81,14 +82,44 @@
                   <th>First Name</th>
        			<th>Last Name</th>
        			<th>Email</th>
+       			<th>Password</th>
                   <th>Date Of Birth</th>
-                  <th>Gender</th>
-                  <th>City</th>
+                  <th>Gender</th>                
                   <th>Country</th>
+                   <th>State</th>
+                   <th>City</th>
+                   <th>Address</th>
                   <th>Contact No</th>
+                  
                   <th>Action</th>
                 </tr>
               </thead>
+              <tbody>
+              
+              <c:forEach items="${sessionScope.userList}" var="i">
+			<tr>
+				<td>${i.rid}</td>
+				<td>${i.fn}</td>
+				<td>${i.ln}</td>
+				<td>${i.email}</td>
+				<td>${i.pw}</td>
+				<td>${i.date}</td>
+				<td>${i.gender}</td>
+				<td>${i.cv.countryName}</td>
+				<td>${i.sv.stateName}</td>
+				<td>${i.civ.cityName}</td>
+				<td>${i.address }</td>	
+				<td>${i.contact}</td>
+						
+				<td><div class="btn-group mb-sm"><button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" type="button" name="${i.rid}">Action<span class="caret"></span></button>
+				<ul class="dropdown-menu" role="menu"><li><a href="<%=request.getContextPath()%>/regController?flag=Editreg&regId=${i.rid}">Edit</a></li>
+				<li><a href="<%=request.getContextPath()%>/regController?flag=Deletereg&regId=${i.rid}">DELETE</a></li></ul></div></td>
+				
+			</tr>
+			
+			<c:remove var="userList" scope="session" />
+		</c:forEach>
+              </tbody>
                   </table>
           </div>
         </div>

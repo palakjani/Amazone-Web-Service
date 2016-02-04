@@ -5,13 +5,12 @@ import java.io.Serializable;
 public class loginVO implements Serializable{
 	private int loginid;
 	private String email,password;
-
-	regVO rv=new regVO();
-	public regVO getRv() {
-		return rv;
+    private String UserType;
+	public String getUserType() {
+		return UserType;
 	}
-	public void setRv(regVO rv) {
-		this.rv = rv;
+	public void setUserType(String userType) {
+		UserType = userType;
 	}
 	
 	public int getLoginid() {

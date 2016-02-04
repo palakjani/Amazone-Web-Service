@@ -73,8 +73,8 @@
            
             <li class="nav-parent"><a href=""><i class="fa fa-suitcase"></i> <span>Create Bucket</span></a>
               <ul class="children">
-                <li><a href="bucketc.jsp">Add Bucket</a></li>
-                <li><a href="bucketc.jsp">Search Bucket</a></li>
+                <li><a href="<%=request.getContextPath()%>/bucketController?flag=SearchRegion">Add Bucket</a></li>
+                <li><a href="<%=request.getContextPath()%>/bucketController?flag=SearchBucket">View Bucket</a></li>
                 
               </ul>
             </li>

@@ -81,6 +81,10 @@
                  <li><a href="<%=request.getContextPath()%>/ExtensionController?flag=SearchExtension"> search Extension </a></li>
                
               </ul>
+               <li class="nav-parent"><a href=""><i class="fa fa-suitcase"></i> <span>Manage Region</span></a>
+              <ul class="children">
+                <li><a href="AddRegion.jsp">Add Region</a></li>
+                <li><a href="">View Region</a></li></ul>
             </li>
             <li class="nav-parent"><a href=""><i class="fa fa-suitcase"></i> <span>Manage Bucket</span></a>
               <ul class="children">
@@ -115,7 +119,7 @@
               </ul>
               <li class="nav-parent"><a href=""><i class="fa fa-suitcase"></i> <span>Manage City</span></a>
               <ul class="children">
-                <li><a href="<%=request.getContextPath()%>/CityController?flag=searchState">Add  City</a></li>
+                <li><a href="<%=request.getContextPath()%>/CityController?flag=searchCountry">Add  City</a></li>
                 <li><a href="<%=request.getContextPath()%>/CityController?flag=SearchCity">View  City</a></li>
               
               </ul>

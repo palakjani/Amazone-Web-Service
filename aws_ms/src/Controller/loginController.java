@@ -50,15 +50,15 @@ public class loginController extends HttpServlet {
 
 	private void edit(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		loginVO lv=new loginVO();
-		loginDAO ld=new loginDAO();
+		loginVO loginVO=new loginVO();
+		loginDAO loginDAO=new loginDAO();
 		int loginid=Integer.parseInt(request.getParameter("loginid"));
-		lv.setLoginid(loginid);
-		List ls=new ArrayList();
-		ls=ld.EditLogin(lv);
+		loginVO.setLoginid(loginid);
+		List list=new ArrayList();
+		list=loginDAO.EditLogin(loginVO);
 		HttpSession session = request.getSession();
-		session.setAttribute("EditLogin",ls );
-		System.out.println(ls);
+		session.setAttribute("EditLogin",list );
+		System.out.println(list);
 		response.sendRedirect("admin/loginEdit.jsp");
 	}
 
@@ -81,16 +81,17 @@ public class loginController extends HttpServlet {
 		// TODO Auto-generated method stub\
 		String flag=request.getParameter("flag");
 		
-		if(flag.equals("Updatereg"))
+		if(flag.equals("UpdateUser"))
 		{
 			update(request,response);
 		}
 		
-		String local_email,local_password,db_email,db_password="";
-		local_email=request.getParameter("email");
-		local_password=request.getParameter("password");
+		
 
 		if(flag.equals("validateUser")){
+			String local_email,local_password,db_email,db_password="";
+			local_email=request.getParameter("email");
+			local_password=request.getParameter("password");
 			loginVO lv = new loginVO();
 			loginDAO ld = new loginDAO();
 			lv.setEmail(local_email);
@@ -118,20 +119,18 @@ public class loginController extends HttpServlet {
 		int loginid=Integer.parseInt(request.getParameter("loginid"));
 		String email=request.getParameter("email");
 		String password=request.getParameter("password");
-		loginVO lv=new loginVO();
-		regVO rv=new regVO();
-		rv.setRid(Integer.parseInt(request.getParameter(email)));
-		lv.setLoginid(loginid);
-		lv.setEmail(email);
-		lv.setPassword(password);
-		loginDAO ld=new loginDAO();
-		ld.UpdateLogin(lv);
-		lv.setRv(rv);
+		
+		loginVO loginVO=new loginVO();
+		
+		loginVO.setLoginid(loginid);
+		loginVO.setEmail(email);
+		loginVO.setPassword(password);
+		loginVO.setUserType("user");
+		loginDAO loginDAO=new loginDAO();
+		loginDAO.UpdateLogin(loginVO);
 		search(request, response);
 	}
-
 	
-		
 	}
 
 

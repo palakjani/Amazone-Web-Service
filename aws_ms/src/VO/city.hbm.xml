@@ -16,7 +16,7 @@
 		<property name="cityDescription">
 			<column name="CityDescription" />
 		</property>
-		
+	
 		<many-to-one class="VO.stateVO" name="sv" column="sid"></many-to-one>
 	</class>
 </hibernate-mapping>

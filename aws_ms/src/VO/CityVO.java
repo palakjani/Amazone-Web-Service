@@ -6,7 +6,20 @@ public class CityVO implements Serializable{
 	private int cid;
 	private String cityName;
 	private String cityDescription;
-	
+	countryVO countryVO;
+	countryVO cv=new countryVO();
+	public countryVO getCountryVO() {
+		return countryVO;
+	}
+	public void setCountryVO(countryVO countryVO) {
+		this.countryVO = countryVO;
+	}
+	public countryVO getCv() {
+		return cv;
+	}
+	public void setCv(countryVO cv) {
+		this.cv = cv;
+	}
 	stateVO stateVO;
 	stateVO sv = new stateVO();
 	

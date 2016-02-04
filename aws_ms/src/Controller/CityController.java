@@ -46,6 +46,10 @@ public class CityController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String flag = request.getParameter("flag");
+		if(flag.equals("searchCountry"))
+		{
+			searchCountry(request,response);
+		}
 		if(flag.equals("searchState"))
 		{
 			searchState(request,response);
@@ -62,15 +66,28 @@ public class CityController extends HttpServlet {
 			}
 	}
 	
+	private void searchCountry(HttpServletRequest request,
+			HttpServletResponse response)throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		countryVO cv=new countryVO();
+		CityDAO cd=new CityDAO();
+		List ls=CityDAO.searchCountry(cv);
+		HttpSession session=request.getSession();
+		session.setAttribute("countryList", ls);
+		response.sendRedirect("admin/city.jsp");
+	}
+
 	private void searchState(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		stateVO sv=new stateVO();
-		CityDAO sd=new CityDAO();
-		List ls=CityDAO.searchState(sv);
+		int countryId=Integer.parseInt(request.getParameter("countryId"));		
+		countryVO cv=new countryVO();
+		cv.setId(countryId);
+		CityDAO cd=new CityDAO();
+		List ls=cd.searchState(cv);
 		HttpSession session=request.getSession();
 		session.setAttribute("stateList", ls);
-		response.sendRedirect("admin/city.jsp");
+		response.sendRedirect("admin/json/loadState.jsp");
 	}
 
 	protected void search (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -125,7 +142,7 @@ public class CityController extends HttpServlet {
 	protected void insert (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		String stateName=request.getParameter("stateName");
+		String stateName=request.getParameter("state");
 		String cityName=request.getParameter("cityName");
 		String cityDescription=request.getParameter("cityDescription");
 	

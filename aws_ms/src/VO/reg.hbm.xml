@@ -17,14 +17,6 @@
 			<column name="lastname" />
 		</property>
 		
-		<property name="email">
-			<column name="email" />
-		</property>
-		
-		<property name="pw">
-			<column name="password" />
-		</property>
-		
 		<property name="date">
 			<column name="date" />
 		</property>
@@ -41,9 +33,10 @@
 			<column name="contact" />
 		</property>
 		
-		<many-to-one class="VO.countryVO" name="cv" column="id"></many-to-one>
-		<many-to-one class="VO.stateVO" name="sv" column="sid"></many-to-one>
-		<many-to-one class="VO.CityVO" name="civ" column="cid"></many-to-one>
+		<many-to-one class="VO.countryVO" name="countryVO" column="id"></many-to-one>
+		<many-to-one class="VO.stateVO" name="stateVO" column="sid"></many-to-one>
+		<many-to-one class="VO.CityVO" name="cityVO" column="cid"></many-to-one>
+		<many-to-one class="VO.loginVO" name="logionVO" column="loginid"></many-to-one>
 	
 	</class>
 </hibernate-mapping>

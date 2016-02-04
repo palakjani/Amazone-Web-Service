@@ -139,7 +139,7 @@ public class regDAO {
 		return l;
 	}
 
-	public static void UpdateReg(regVO rv) {
+	public static void UpdateReg(regVO regVO) {
 		// TODO Auto-generated method stub
 		try
 		{
@@ -149,7 +149,7 @@ public class regDAO {
 			
 			Transaction tr=session.beginTransaction();
 			
-			session.saveOrUpdate(rv);
+			session.saveOrUpdate(regVO);
 		
 			
 			tr.commit();

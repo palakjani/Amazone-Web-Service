@@ -109,7 +109,7 @@ public class loginDAO {
 		return l;
 	}
 
-	public static void UpdateLogin(loginVO lv) {
+	public static void UpdateLogin(loginVO loginVO) {
 		// TODO Auto-generated method stub
 		try
 		{
@@ -119,7 +119,7 @@ public class loginDAO {
 			
 			Transaction tr=session.beginTransaction();
 			
-			session.saveOrUpdate(lv);
+			session.saveOrUpdate(loginVO);
 		
 			
 			tr.commit();
@@ -128,5 +128,31 @@ public class loginDAO {
 		{
 			z.printStackTrace();
 		}
+	}
+
+	public List authentication(loginVO loginVO) {
+		// TODO Auto-generated method stub
+
+		List ls=null;
+		try{
+			
+			Session session = null;
+			SessionFactory sessionfactory = new Configuration().configure()
+					.buildSessionFactory();
+			session = sessionfactory.openSession();
+		
+			
+			Query  q =  session.createQuery("from loginVO where email='"+loginVO.getEmail()+"' and password='"+loginVO.getPassword()+"' "); 
+			
+			
+			ls =  q.list();
+			System.out.println(ls.size());
+			System.out.println("Done");
+		} catch (Exception e) 
+		{
+			e.printStackTrace();
+
+		}
+		return ls;
 	}
 }

@@ -19,9 +19,9 @@
 			<column name="password" />
 		</property>
 	
-		
-	<many-to-one class="VO.regVO" name="rv" column="rid"></many-to-one>
-		
+		<property name="UserType">
+			<column name="UserType" />
+		</property>
 		
 	</class>
 </hibernate-mapping>

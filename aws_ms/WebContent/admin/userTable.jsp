@@ -81,13 +81,12 @@
                 <th>Index</th>
                   <th>First Name</th>
        			<th>Last Name</th>
-       			<th>Email</th>
-       			<th>Password</th>
-                  <th>Date Of Birth</th>
+       			  <th>Date Of Birth</th>
                   <th>Gender</th>                
                   <th>Country</th>
                    <th>State</th>
                    <th>City</th>
+                   <th>Login Id</th>
                    <th>Address</th>
                   <th>Contact No</th>
                   
@@ -101,13 +100,12 @@
 				<td>${i.rid}</td>
 				<td>${i.fn}</td>
 				<td>${i.ln}</td>
-				<td>${i.email}</td>
-				<td>${i.pw}</td>
 				<td>${i.date}</td>
 				<td>${i.gender}</td>
-				<td>${i.cv.countryName}</td>
-				<td>${i.sv.stateName}</td>
-				<td>${i.civ.cityName}</td>
+				<td>${i.countryVO.countryName}</td>
+				<td>${i.stateVO.stateName}</td>
+				<td>${i.cityVO.cityName}</td>
+				<td>${i.logionVO.loginid}</td>
 				<td>${i.address }</td>	
 				<td>${i.contact}</td>
 						

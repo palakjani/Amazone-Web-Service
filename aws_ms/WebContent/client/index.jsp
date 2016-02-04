@@ -29,6 +29,7 @@
 	<div style='text-align:center'><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"> src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div>  
   <![endif]-->
 </head>
+ 
 <body>
 <!--======= Side Navigation =======-->
 <nav id="owl-lateral-nav">

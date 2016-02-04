@@ -4,24 +4,22 @@ import java.io.Serializable;
 
 public class regVO implements Serializable{
 	private int rid;
-	private String fn,ln,email,pw,date,gender,address,contact;
+	private String fn,ln,date,gender,address,contact;
 	countryVO countryVO;
-	countryVO cv = new countryVO();
 	stateVO stateVO;
-	stateVO sv = new stateVO();
 	CityVO cityVO;
-	CityVO civ = new CityVO();
+	loginVO logionVO;
+	public loginVO getLogionVO() {
+		return logionVO;
+	}
+	public void setLogionVO(loginVO logionVO) {
+		this.logionVO = logionVO;
+	}
 	public countryVO getCountryVO() {
 		return countryVO;
 	}
 	public void setCountryVO(countryVO countryVO) {
 		this.countryVO = countryVO;
-	}
-	public countryVO getCv() {
-		return cv;
-	}
-	public void setCv(countryVO cv) {
-		this.cv = cv;
 	}
 	public stateVO getStateVO() {
 		return stateVO;
@@ -29,23 +27,11 @@ public class regVO implements Serializable{
 	public void setStateVO(stateVO stateVO) {
 		this.stateVO = stateVO;
 	}
-	public stateVO getSv() {
-		return sv;
-	}
-	public void setSv(stateVO sv) {
-		this.sv = sv;
-	}
 	public CityVO getCityVO() {
 		return cityVO;
 	}
 	public void setCityVO(CityVO cityVO) {
 		this.cityVO = cityVO;
-	}
-	public CityVO getCiv() {
-		return civ;
-	}
-	public void setCiv(CityVO civ) {
-		this.civ = civ;
 	}
 	public int getRid() {
 		return rid;
@@ -65,18 +51,7 @@ public class regVO implements Serializable{
 	public void setLn(String ln) {
 		this.ln = ln;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getPw() {
-		return pw;
-	}
-	public void setPw(String pw) {
-		this.pw = pw;
-	}
+	
 	public String getDate() {
 		return date;
 	}

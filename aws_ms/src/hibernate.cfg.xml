@@ -22,6 +22,7 @@
          <mapping resource="VO/storagePlan.hbm.xml" />
           <mapping resource="VO/reg.hbm.xml" />   
            <mapping resource="VO/login.hbm.xml" />   
-             
+           <mapping resource="VO/bucket.hbm.xml" />
+           <mapping resource="VO/region.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

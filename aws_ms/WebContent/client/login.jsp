@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
+<base href="${pageContext.request.contextPath}/client/">
 <title>AWS</title>
 <meta charset="utf-8">
 <link rel="icon" href="img/favicon.ico" type="image/x-icon">
@@ -97,7 +98,7 @@
         <div class="row">
           <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
             
-              <form method="post" action="<%=request.getContextPath()%>/loginController">
+              <form method="post" action="login.jsp">
                 <h2>Please Login <small>It's free and always will be.</small></h2>
                 <hr class="colorgraph">
                 
@@ -112,7 +113,7 @@
                   
                   <div class="col-xs-6 col-md-6">
                     <input type="submit" value="Sign In" class="btn btn-primary btn-block btn-lg" tabindex="7">
-                  <input type="hidden" name="flag" value="validateUser" />
+                  <input type="hidden" name="flag" value="login" />
                   </div>
                   <div class="col-xs-6 col-md-6"><a href="<%=request.getContextPath()%>/regController?flag=searchLocation" class="btn btn-success btn-block btn-lg">Registration</a></div>
 				   <div>

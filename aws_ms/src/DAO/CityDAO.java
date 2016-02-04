@@ -15,14 +15,14 @@ import VO.stateVO;
 public class CityDAO {
 	
 
-	public static List searchState(stateVO stateVO) {
+	public List searchState(countryVO cv) {
 		
 		List ls = null;
 		try
 		{
 			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 			Session session = sessionFactory.openSession();
-			Query w=session.createQuery("from stateVO");
+			Query w=session.createQuery("from stateVO where countryVO='"+cv.getId()+"'");
 			ls=w.list();
 			System.out.println("state list size :"+ls);
 		}
@@ -148,6 +148,26 @@ public class CityDAO {
 		}
 		return l;
 	
+	}
+
+
+
+	public static List searchCountry(countryVO cv) {
+		// TODO Auto-generated method stub
+		List ls = null;
+		try
+		{
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			Query w=session.createQuery("from countryVO");
+			ls=w.list();
+			System.out.println("country list size :"+ls);
+		}
+		catch(Exception z)
+		{
+			z.printStackTrace();
+		}
+		return ls;
 	}
 
 

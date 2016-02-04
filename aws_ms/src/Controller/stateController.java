@@ -122,7 +122,7 @@ public class stateController extends HttpServlet {
 		String countryName=request.getParameter("country");
 		String stateName=request.getParameter("stateName");
 		String stateDescription=request.getParameter("stateDescription");
-	
+		
 		
 		stateVO v=new stateVO();
 		
@@ -136,10 +136,7 @@ public class stateController extends HttpServlet {
 		d.InsertState(v);
 		
 		response.sendRedirect("admin/state.jsp");
-
 		
-	
-	
 }
 protected void update (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int stateId= Integer.parseInt(request.getParameter("stateId"));

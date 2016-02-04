@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -56,17 +57,18 @@
               </div>
               <div class="panel-body ">
                 <hr>
-                <form id="basicForm" action="form-validation.html" class="form-horizontal">
+                <form id="basicForm" method="post" action="" class="form-horizontal">
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Bucket Name <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <input type="text" name="name" class="form-control" placeholder="Enter your Bucket Name..." required />
+                      <input type="text" name="bucketName" class="form-control" placeholder="Enter your Bucket Name..." required />
                     </div> 
                   </div>
 <label class="col-sm-3 control-label">Region<span class="text-danger">*</span></label>
                      <div class="col-sm-8">
-        <select id="region" class="select2 select2-hidden-accessible" required="" data-placeholder="Choose One" style="width: 100%" name="region" aria-required="true" tabindex="-1" aria-hidden="true"></select>
-     
+        <select id="region" class="select2 select2-hidden-accessible" required="" data-placeholder="Choose One" style="width: 100%" name="region" aria-required="true" tabindex="-1" aria-hidden="true">
+    
+     </select>
         <label class="error" for="region"></label>
     </div>
 
@@ -77,7 +79,8 @@
                     <div class="col-sm-9 col-sm-offset-3">
                       <button class="btn btn-success btn-quirk btn-wide mr5">Create</button>
                       <button type="reset" class="btn btn-quirk btn-wide btn-default">Cancel</button>
-                    </div>
+                     
+                     </div>
                   </div>
 
                 </form>

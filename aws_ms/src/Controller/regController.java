@@ -165,8 +165,7 @@ public class regController extends HttpServlet {
 		String fn,ln,email,pw,dob,gender,address,contact,country,state,city;
 		fn=request.getParameter("firstname");
 		ln=request.getParameter("lastname");
-		email=request.getParameter("email");
-		pw=request.getParameter("password");
+		
 		dob=request.getParameter("date");
 		gender=request.getParameter("gender");
 		if(gender.equals("female")){
@@ -180,27 +179,32 @@ public class regController extends HttpServlet {
 		country=request.getParameter("country");
 		state=request.getParameter("state");
 		city=request.getParameter("city");
-		regVO rv=new regVO();
-		rv.setRid(rid);
-		rv.setFn(fn);
-		rv.setLn(ln);
-		rv.setEmail(email);
-		rv.setPw(pw);
-		rv.setDate(dob);
-		rv.setGender(gender);
-	    rv.setAddress(address);
-	    rv.setContact(contact);
-	    stateVO sv=new stateVO();
-		sv.setStateId(Integer.parseInt(state));
-		countryVO cv=new countryVO();
-		cv.setId(Integer.parseInt(country));
-		CityVO civ=new CityVO();
-		civ.setCid(Integer.parseInt(city));
-	    rv.setCv(cv);
-	    rv.setSv(sv);
-	    rv.setCiv(civ);
-		regDAO rd=new regDAO();
-		rd.UpdateReg(rv);
+		String loginid=request.getParameter("loginid");
+		regVO regVO=new regVO();
+		regVO.setRid(rid);
+		regVO.setFn(fn);
+		regVO.setLn(ln);
+		regVO.setDate(dob);
+		regVO.setGender(gender);
+		regVO.setAddress(address);
+		regVO.setContact(contact);
+		CityVO cityVO=new CityVO();
+		stateVO stateVO=new stateVO();
+		countryVO countryVO=new countryVO();
+		loginVO logionVO = new loginVO();
+		 cityVO.setCid(Integer.parseInt(city));
+		    regVO.setCityVO(cityVO);
+		    stateVO.setStateId(Integer.parseInt(state));
+		    regVO.setStateVO(stateVO);
+		    countryVO.setId(Integer.parseInt(country));
+		    regVO.setCountryVO(countryVO);
+		   logionVO.setLoginid(Integer.parseInt(loginid));
+		    regVO.setLogionVO(logionVO);
+		regDAO regDAO=new regDAO();
+		
+		 
+		  regDAO.UpdateReg(regVO);
+		
 		search(request, response);
 	}
 
@@ -232,38 +236,32 @@ public class regController extends HttpServlet {
 		String contact = request.getParameter("contact");
 
 		HttpSession session = request.getSession();
-		regVO rv=new regVO();
-		loginVO lv=new loginVO();
-		loginDAO ld=new loginDAO();
-		stateVO sv=new stateVO();
-		sv.setStateId(Integer.parseInt(state));
-		countryVO cv=new countryVO();
-		cv.setId(Integer.parseInt(country));
-		CityVO civ=new CityVO();
-		civ.setCid(Integer.parseInt(city));
-		rv.setFn(fn);
-		rv.setLn(ln);
-		rv.setEmail(email);
-		rv.setPw(pw);
-		rv.setDate(dob);
-		rv.setGender(gender);
-	    rv.setAddress(address);
-	    rv.setContact(contact);
-	    rv.setCv(cv);
-	    rv.setSv(sv);
-	    rv.setCiv(civ);
-	    regDAO rd = new regDAO();
-	    
-		rd.InsertInfo(rv);
-		lv.setEmail(email);
-		lv.setPassword(pw);
-		rv.setRid(Integer.parseInt(email));
-		lv.setRv(rv);
-		ld.InsertLogInfo(lv);
-		
+		regVO regVO = new regVO();
+		regDAO regDAO = new regDAO();
+	    loginVO loginVO = new loginVO();
+	    loginDAO loginDAO = new loginDAO();
+	    countryVO countryVO = new countryVO();
+	    stateVO stateVO = new stateVO();
+	    CityVO cityVO = new CityVO();
+	    loginVO.setEmail(email);
+	    loginVO.setPassword(pw);
+	    loginVO.setUserType("user");
+	    loginDAO.InsertLogInfo(loginVO);
+	    regVO.setFn(fn);
+	    regVO.setLn(ln);
+	    regVO.setGender(gender);
+	    regVO.setDate(dob);
+	    regVO.setAddress(address);
+	    regVO.setContact(contact);
+	    cityVO.setCid(Integer.parseInt(city));
+	    regVO.setCityVO(cityVO);
+	    stateVO.setStateId(Integer.parseInt(state));
+	    regVO.setStateVO(stateVO);
+	    countryVO.setId(Integer.parseInt(country));
+	    regVO.setCountryVO(countryVO);
+	    regVO.setLogionVO(loginVO);
+	    regDAO.InsertInfo(regVO);	    
 		response.sendRedirect("client/login.jsp");
-	    
-		
 	}
 	}
 

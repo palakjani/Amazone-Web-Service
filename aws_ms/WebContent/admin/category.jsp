@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-<base href="${pageContext.request.contextPath}/admin">
+<base href="${pageContext.request.contextPath}/admin/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <meta name="description" content="">
@@ -42,7 +42,7 @@
 
       <ol class="breadcrumb breadcrumb-quirk">
         <li><a href="index.jsp"><i class="fa fa-home mr5"></i> Home</a></li>
-        <li><a href="general-forms.html">Forms</a></li>
+     
         <li class="active">Category</li>
       </ol>
 
@@ -51,7 +51,7 @@
         <div class="col-md-12">
           <div class="panel">
               <div class="panel-heading nopaddingbottom">
-                <h4 class="panel-title">Category description</h4>
+                <h4 class="panel-title">Add Category</h4>
                 <p>Please enter your category and a description.</p>
               </div>
               <div class="panel-body">

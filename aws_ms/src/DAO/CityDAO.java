@@ -172,6 +172,26 @@ public class CityDAO {
 
 
 
+	public static List loadState(countryVO countryVO) {
+		// TODO Auto-generated method stub
+		List ls = null;
+		try
+		{
+			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			Query w=session.createQuery("from stateVO where cv='"+countryVO.getId()+"'");
+			ls=w.list();
+			System.out.println("state list size :"+ls);
+		}
+		catch(Exception z)
+		{
+			z.printStackTrace();
+		}
+		return ls;
+	}
+
+
+
 	
 
 

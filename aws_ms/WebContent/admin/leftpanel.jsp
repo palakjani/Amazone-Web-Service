@@ -84,7 +84,7 @@
                <li class="nav-parent"><a href=""><i class="fa fa-suitcase"></i> <span>Manage Region</span></a>
               <ul class="children">
                 <li><a href="AddRegion.jsp">Add Region</a></li>
-                <li><a href="">View Region</a></li></ul>
+                <li><a href="<%=request.getContextPath()%>/regionController?flag=SearchRegion">View Region</a></li></ul>
             </li>
             <li class="nav-parent"><a href=""><i class="fa fa-suitcase"></i> <span>Manage Bucket</span></a>
               <ul class="children">

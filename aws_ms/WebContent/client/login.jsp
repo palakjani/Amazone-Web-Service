@@ -5,6 +5,7 @@
 <html lang="en">
 <head>
 <base href="${pageContext.request.contextPath}/client/">
+<%-- <base href="${pageContext.request.contextPath}/client/"> --%>
 <title>AWS</title>
 <meta charset="utf-8">
 <link rel="icon" href="img/favicon.ico" type="image/x-icon">

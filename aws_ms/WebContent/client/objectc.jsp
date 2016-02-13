@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="${pageContext.request.contextPath}/client/">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -26,6 +28,55 @@
   <script src="../lib/html5shiv/html5shiv.js"></script>
   <script src="../lib/respond/respond.src.js"></script>
   <![endif]-->
+  <script type="text/javascript">
+  function loadExtention()
+  {
+	var category=document.getElementById("category").value;
+	var xmlhttp=new XMLHttpRequest();
+    removeAllExtension();
+    xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4) 
+		{
+			var jsonObj = JSON.parse(xmlhttp.responseText);
+		
+			for(i=0 ; i<jsonObj.length ; i++)
+			{
+				var createOption=document.createElement("option");
+				
+				
+				createOption.value=jsonObj[i].extensionId;
+				createOption.text=jsonObj[i].extensionName;
+				
+				document.basicForm.extension.options.add(createOption);
+				
+				
+			}
+		}
+    }
+    
+    xmlhttp.open("get","${pageContext.request.contextPath}/objectController?flag=loadExtension&categoryId="+category,true);
+	xmlhttp.send();
+	/* jQuery(".chosen-select1").chosen({'width':'100%','white-space':'nowrap'}); */
+	/* Holds the status of the XMLHttpRequest. Changes from 0 to 4:
+		0: request not initialized
+		1: server connection established
+		2: request received
+		3: processing request
+		4: request finished and response is ready */
+  }
+  
+function removeAllExtension()
+{
+	var re=document.basicForm.extension.options.length;
+
+	for(i=re;i>0;i--)
+	{
+		document.basicForm.extension.remove(i);
+	}
+
+  }
+  
+  </script>
 </head>
 
 <body>
@@ -56,19 +107,47 @@
               </div>
               <div class="panel-body ">
                 <hr>
-                <form id="basicForm" action="form-validation.html" class="form-horizontal">
+                <form id="basicForm" name="basicForm" action="form-validation.html" class="form-horizontal">
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Bucket Name <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-        <select id="bucket" class="select2 select2-hidden-accessible" required="" data-placeholder="Choose One" style="width: 100%" name="bucket" aria-required="true" tabindex="-1" aria-hidden="true"></select>
-     
+        <select id="bucket" class="select2 select2-hidden-accessible" required="" data-placeholder="Choose One" style="width: 100%" name="bucketName" aria-required="true" tabindex="-1" aria-hidden="true">
+            <option value="0">Select Bucket</option>
+            <c:forEach items="${sessionScope.bucketList}" var="i">
+            <option value="${i.id}">${i.bucketName}</option>
+            </c:forEach>
+            </select>
         <label class="error" for="bucket"></label>
     </div>
+                  </div>
+                   <div class="form-group">
+                    <label class="col-sm-3 control-label">Select Category <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+        <select id="category" class="select2 select2-hidden-accessible" required="" onchange="loadExtention()" data-placeholder="Choose One" style="width: 100%" name="category" aria-required="true" tabindex="-1" aria-hidden="true">
+     <option value="0">Select Category</option>
+     <c:forEach items="${sessionScope.categoryList}" var="i">
+     <option value="${i.id}">${i.categoryName}</option>
+     
+     </c:forEach>
+     </select>
+        <label class="category" for="country"></label>
+    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Select Extension <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      <select id="extension" class="select2 select2-hidden-accessible" required="" data-placeholder="Choose One" style="width: 100%" name="extension" aria-required="true" tabindex="-1" aria-hidden="true">
+                      <option value="">choose Extension</option>
+                      </select>
+     					
+        <label class="category" for="extension"></label>
+                    </div> 
                   </div>
  <div class="form-group">
                     <label class="col-sm-3 control-label">Object Name <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <input type="text" name="name" class="form-control" placeholder="Enter your object name..." required />
+                      <input type="text" name="objectName" class="form-control" placeholder="Enter your object name..." required />
                     </div> 
                   </div>
                    <div class="form-group">
@@ -80,6 +159,7 @@
                   <div class="row">
                     <div class="col-sm-9 col-sm-offset-3">
                       <button class="btn btn-success btn-quirk btn-wide mr5">Submit</button>
+                      <input type="hidden" name="flag" value="insertObject"/>
                       <button type="reset" class="btn btn-quirk btn-wide btn-default">Reset</button>
                     </div>
                   </div>

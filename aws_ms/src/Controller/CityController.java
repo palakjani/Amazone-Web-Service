@@ -64,8 +64,27 @@ public class CityController extends HttpServlet {
 			
 			edit(request, response);
 			}
+		if(flag.equals("loadState"))
+		{
+			loadState(request,response);
+		}
 	}
 	
+	private void loadState(HttpServletRequest request,
+			HttpServletResponse response)throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		int countryId=Integer.parseInt(request.getParameter("countryId"));
+		countryVO countryVO=new countryVO();
+		countryVO.setId(countryId);
+		CityDAO cityDAO=new CityDAO();
+		List list=new ArrayList();
+		list=CityDAO.loadState(countryVO);
+		System.out.println(list);
+		HttpSession session=request.getSession();
+		session.setAttribute("loadStateList", list);
+		response.sendRedirect("admin/json/loadState.jsp");
+	}
+
 	private void searchCountry(HttpServletRequest request,
 			HttpServletResponse response)throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -104,9 +123,7 @@ public class CityController extends HttpServlet {
 	protected void edit(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int cid=Integer.parseInt(request.getParameter("cityId"));
-		stateVO sv=new stateVO();
-		stateDAO sd=new stateDAO();
-		List stateList=sd.SearchState(sv);
+		
 		
 		CityVO cv=new CityVO();
 		CityDAO cd=new CityDAO();
@@ -117,7 +134,12 @@ public class CityController extends HttpServlet {
 		System.out.println(ls);
 		HttpSession session=request.getSession();
 		session.setAttribute("cityList", ls);
-		session.setAttribute("stateList", stateList);
+		
+		countryVO countryVO=new countryVO();
+		CityDAO cityDAO=new CityDAO();
+		List list=cityDAO.searchCountry(countryVO);
+		session.setAttribute("countryList", list);
+		
 		response.sendRedirect("admin/cityEdit.jsp");
 	}
 
@@ -168,7 +190,7 @@ public class CityController extends HttpServlet {
 protected void update (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int cid= Integer.parseInt(request.getParameter("cid"));
 		
-		String stateName=request.getParameter("stateName");
+		String stateName=request.getParameter("state");
 		String cityName=request.getParameter("cityName");
 		String cityDescription=request.getParameter("cityDescription");
 	

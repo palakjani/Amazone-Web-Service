@@ -5,6 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="${pageContext.request.contextPath}/admin/">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -12,7 +13,7 @@
   <meta name="author" content="">
   <!--<link rel="shortcut icon" href="../images/favicon.png" type="image/png">-->
 
-  <title>Add City</title>
+  <title>Edit City</title>
 
   <link rel="stylesheet" href="css/font-awesome.css">
   <link rel="stylesheet" href="css/weather-icons.css">
@@ -28,6 +29,56 @@
   <script src="../lib/html5shiv/html5shiv.js"></script>
   <script src="../lib/respond/respond.src.js"></script>
   <![endif]-->
+   
+   <script>
+ function loadState()
+ {
+	 var country=document.getElementById("country");
+	 var xmlhttp=new XMLHttpRequest();
+	 removeAllState();
+		
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4) 
+			{
+				var jsonObj = JSON.parse(xmlhttp.responseText);
+				
+				for(i=0 ; i<jsonObj.length ; i++)
+				{
+					var createOption=document.createElement("option");
+					
+					
+					createOption.value=jsonObj[i].stateId;
+					createOption.text=jsonObj[i].stateName;
+					
+					document.cityForm.state.options.add(createOption);
+					
+				}
+			}
+			
+		}
+
+		xmlhttp.open("get", "${pageContext.request.contextPath}/CityController?flag=loadState&countryId="+country.value, true);
+		xmlhttp.send();
+		/* jQuery(".chosen-select1").chosen({'width':'100%','white-space':'nowrap'}); */
+		/* Holds the status of the XMLHttpRequest. Changes from 0 to 4:
+			0: request not initialized
+			1: server connection established
+			2: request received
+			3: processing request
+			4: request finished and response is ready */
+	}
+	
+	function removeAllState()
+	{
+		var removeState=document.cityForm.state.options.length;
+		for(i=removeState ; i>0 ; i-- )
+		{
+			document.cityForm.state.remove(i);
+		}
+	}
+ </script>
+   
+   
 </head>
 
 <body>
@@ -43,8 +94,8 @@
     <div class="contentpanel">
 
       <ol class="breadcrumb breadcrumb-quirk">
-        <li><a href="index.html"><i class="fa fa-home mr5"></i> Home</a></li>
-        <li><a href="general-forms.html">Forms</a></li>
+        <li><a href="index.jsp"><i class="fa fa-home mr5"></i> Home</a></li>
+       
         <li class="active">City</li>
       </ol>
 
@@ -58,20 +109,33 @@
               </div>
               <div class="panel-body ">
                 <hr>
-                <form method="post" id="basicForm" action="<%=request.getContextPath()%>/CityController" class="form-horizontal">
+                <form method="post" name="cityForm" id="basicForm" action="<%=request.getContextPath()%>/CityController" class="form-horizontal">
                  <c:forEach items="${sessionScope.cityList}" var="i">
               	
     <div class="form-group">
-                    <label class="col-sm-3 control-label">State Name <span class="text-danger">*</span></label>
+                    <label class="col-sm-3 control-label">Country Name <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-        <select  class="select2 select2-hidden-accessible" required="" data-placeholder="Choose One" style="width: 100%" name="stateName" aria-required="true" tabindex="-1" aria-hidden="true">
-     <option value="0">Select State</option>
-											<c:forEach items="${sessionScope.stateList}" var="j">
-												<option value="${j.stateId}">${j.stateName}</option>
-											</c:forEach></select>
-        <label class="error" for="state"></label>
+        <select  class="select2 select2-hidden-accessible" required="" onchange="loadState()" data-placeholder="Choose One" style="width: 100%" name="country" id="country" aria-required="true" tabindex="-1" aria-hidden="true">
+     <option value="0">Select Country</option>
+											<c:forEach items="${sessionScope.countryList}" var="j">
+												<option value="${j.id}">${j.countryName}</option>
+												
+											</c:forEach>
+											</select>  
+											  <label class="error" for="country"></label>
     </div>
                   </div>
+                          
+    <div class="form-group">
+                    <label class="col-sm-3 control-label">State Name <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+        <select  class="select2 select2-hidden-accessible" required="" data-placeholder="Choose One" style="width: 100%" name="state" id="state" aria-required="true" tabindex="-1" aria-hidden="true">
+     
+												<option value="">choose state</option>
+		        <label class="error" for="state"></label>
+		        </select>
+    </div>
+                 </div>
                   
                   <div class="form-group">
                     <label class="col-sm-3 control-label">City Name <span class="text-danger">*</span></label>

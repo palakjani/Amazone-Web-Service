@@ -10,6 +10,7 @@ import org.hibernate.cfg.Configuration;
 
 import VO.CityVO;
 import VO.countryVO;
+import VO.loginVO;
 import VO.regVO;
 import VO.stateVO;
 
@@ -165,6 +166,54 @@ public class regDAO {
 		
 	}
 
+	public static List loadCity(stateVO stateVO) {
+		// TODO Auto-generated method stub
+		List ls=null;
+		try
+		{
+			SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
+			
+			Session session=sessionFactory.openSession();
+			
+			Transaction tr=session.beginTransaction();
+			
+			Query w=session.createQuery("from CityVO where sv='"+stateVO.getStateId()+"'");
+			
+			ls=w.list();
+			
+			tr.commit();
+		}
+		catch(Exception z)
+		{
+			z.printStackTrace();
+		}
+		return ls;
+
 	
 
+}
+
+	public static List loademail(loginVO loginVO) {
+		// TODO Auto-generated method stub
+		List ls=null;
+		try
+		{
+			SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
+			
+			Session session=sessionFactory.openSession();
+			
+			Transaction tr=session.beginTransaction();
+			
+			Query w=session.createQuery("from loginVO where email='"+loginVO.getEmail()+"'");
+			
+			ls=w.list();
+			
+			tr.commit();
+		}
+		catch(Exception z)
+		{
+			z.printStackTrace();
+		}
+		return ls;
+	}
 }

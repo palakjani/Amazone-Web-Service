@@ -71,17 +71,17 @@
           <h5 class="sidebar-title">Main Menu</h5>
           <ul class="nav nav-pills nav-stacked nav-quirk">
            
-            <li class="nav-parent"><a href=""><i class="fa fa-suitcase"></i> <span>Create Bucket</span></a>
+            <li class="nav-parent"><a href=""><i class="fa fa-suitcase"></i> <span>Manage Bucket</span></a>
               <ul class="children">
                 <li><a href="<%=request.getContextPath()%>/bucketController?flag=SearchRegion">Add Bucket</a></li>
                 <li><a href="<%=request.getContextPath()%>/bucketController?flag=SearchBucket">View Bucket</a></li>
                 
               </ul>
             </li>
-            <li class="nav-parent"><a href=""><i class="fa fa-th-list"></i> <span>Create Object</span></a>
+            <li class="nav-parent"><a href=""><i class="fa fa-th-list"></i> <span>Manage Object</span></a>
               <ul class="children">
-                <li><a href="objectc.jsp">Add Object</a></li>
-                <li><a href="objectc.jsp">Search Object</a></li>
+                <li><a href="<%=request.getContextPath()%>/objectController?flag=SearchBucket">Add Object</a></li>
+                <li><a href="objectc.jsp">View Object</a></li>
               </ul>
             </li>
             <li class="nav-parent"><a href=""><i class="fa fa-file-text"></i> <span> Storage</span></a>

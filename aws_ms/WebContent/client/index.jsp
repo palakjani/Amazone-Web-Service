@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
 <title>Hosting</title>
+<base href="${pageContext.request.contextPath}/client/">
 <meta charset="utf-8">
 <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>

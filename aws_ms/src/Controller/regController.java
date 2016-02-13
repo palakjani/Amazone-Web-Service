@@ -10,6 +10,7 @@ import java.util.List;
 
 
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -66,7 +67,59 @@ public class regController extends HttpServlet {
 		{
 			delete(request,response);
 		}
+		if(flag.equals("loadState")){
+			loadState(request,response);
+		}
+		if(flag.equals("loadCity")){
+			loadCity(request,response);
+		}
+		if(flag.equals("loadEmail")){
+			loadEmail(request,response);
+		}
 	}
+	private void loadEmail(HttpServletRequest request,
+			HttpServletResponse response)throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String email=request.getParameter("email");
+		loginVO loginVO=new loginVO();
+		loginVO.setEmail(email);
+		regDAO regDAO=new regDAO();
+		List list=new ArrayList();
+		list=regDAO.loademail(loginVO);
+		HttpSession session=request.getSession();
+		session.setAttribute("emailList",list);
+		response.sendRedirect("admin/json/loadEmail.jsp");
+	}
+
+	private void loadCity(HttpServletRequest request,
+			HttpServletResponse response)throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		int stateId=Integer.parseInt(request.getParameter("stateId"));
+		stateVO stateVO=new stateVO();
+		stateVO.setStateId(stateId);
+		regDAO regDAO=new regDAO();
+		List list=new ArrayList();
+		list=regDAO.loadCity(stateVO);
+		HttpSession session = request.getSession();
+		session.setAttribute("cityList", list);
+		response.sendRedirect("admin/json/loadCity.jsp");
+	}
+
+	private void loadState(HttpServletRequest request,
+			HttpServletResponse response)throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		int countryId=Integer.parseInt(request.getParameter("countryId"));
+		countryVO countryVO=new countryVO();
+		countryVO.setId(countryId);
+		CityDAO cityDAO=new CityDAO();
+		List list=new ArrayList();
+		list=CityDAO.loadState(countryVO);
+		System.out.println(list);
+		HttpSession session=request.getSession();
+		session.setAttribute("loadStateList", list);
+		response.sendRedirect("admin/json/loadState.jsp");
+	}
+
 	private void delete(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
@@ -100,12 +153,7 @@ public class regController extends HttpServlet {
 		countryVO cv=new countryVO();
 		countryDAO cd=new countryDAO();
 		List countryList=cd.SearchCountry(cv);
-		stateVO sv=new stateVO();
-		stateDAO sd=new stateDAO();
-		List stateList=sd.SearchState(sv);
-		CityVO ctv=new CityVO();
-		CityDAO ctd=new CityDAO();
-		List cityList=ctd.SearchCity(ctv);
+		
 		
 		regVO rv=new regVO();
 		regDAO rd=new regDAO();
@@ -114,9 +162,8 @@ public class regController extends HttpServlet {
 		ls=regDAO.EditReg(rv);
 		System.out.println(ls);
 		HttpSession session=request.getSession();
-		session.setAttribute("stateList", stateList);
 		session.setAttribute("countryList", countryList);
-		session.setAttribute("cityList", cityList);
+		
 		session.setAttribute("regList", ls);
 		response.sendRedirect("admin/regEdit.jsp");
 	}
@@ -125,16 +172,13 @@ public class regController extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		countryVO countryVO = new countryVO();
-		stateVO stateVO=new stateVO();
-		CityVO cityVO=new CityVO();
+		
 		regDAO rd=new regDAO();
 		List lscountry = rd.SearchCountry(countryVO);
-		List lsstate = rd.SearchState(stateVO);
-		List lscity = rd.SearchCity(cityVO);
+		
 		HttpSession session = request.getSession();
 		session.setAttribute("countryList", lscountry);
-		session.setAttribute("stateList", lsstate);
-		session.setAttribute("cityList", lscity);
+		
 		response.sendRedirect("client/registration.jsp");
 	}
 	
@@ -162,7 +206,7 @@ public class regController extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		int rid=Integer.parseInt(request.getParameter("rid"));
-		String fn,ln,email,pw,dob,gender,address,contact,country,state,city;
+		String fn,ln,dob,gender,address,contact,country,state,city;
 		fn=request.getParameter("firstname");
 		ln=request.getParameter("lastname");
 		
@@ -191,17 +235,17 @@ public class regController extends HttpServlet {
 		CityVO cityVO=new CityVO();
 		stateVO stateVO=new stateVO();
 		countryVO countryVO=new countryVO();
-		loginVO logionVO = new loginVO();
+		
 		 cityVO.setCid(Integer.parseInt(city));
 		    regVO.setCityVO(cityVO);
 		    stateVO.setStateId(Integer.parseInt(state));
 		    regVO.setStateVO(stateVO);
 		    countryVO.setId(Integer.parseInt(country));
 		    regVO.setCountryVO(countryVO);
+		    loginVO logionVO = new loginVO();
 		   logionVO.setLoginid(Integer.parseInt(loginid));
 		    regVO.setLogionVO(logionVO);
 		regDAO regDAO=new regDAO();
-		
 		 
 		  regDAO.UpdateReg(regVO);
 		

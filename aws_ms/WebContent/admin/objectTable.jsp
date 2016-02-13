@@ -4,6 +4,7 @@
 
 <html lang="en">
 <head>
+<base href="${pageContext.request.contextPath}/admin/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <meta name="description" content="">
@@ -34,7 +35,7 @@
     <div class="headerpanel">
 
       <div class="logopanel">
-        <h2><a href="index.html">Quirk</a></h2>
+        <h2><a href="index.jsp">AWS</a></h2>
       </div><!-- logopanel -->
 
       <div class="headerbar">
@@ -69,7 +70,7 @@
 
       <div class="panel">
         <div class="panel-heading">
-          <h4 class="panel-title">Object</h4>
+          <h4 class="panel-title">View Object</h4>
          
         </div>
         <div class="panel-body">

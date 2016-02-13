@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
+<base href="${pageContext.request.contextPath}/client/">
 <title>registration</title>
 <meta charset="utf-8">
 <link rel="icon" href="images/favicon.ico" type="image/x-icon">
@@ -27,6 +28,167 @@
 
 	<div style='text-align:center'><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div>  
   <![endif]-->
+  
+   <script type="text/javascript">
+   function validate(){
+	   var pass=document.getElementById("pass").value;
+	   var cpass=document.getElementById("cpass").value;
+	   
+	   if(pass==cpass)
+		   {
+		   document.getElementById("passsuccess").innerHTML="password match";
+		   document.getElementById("passerror").innerHTML="";
+		   if(document.getElementById("emailer").innerHTML==""){
+		   $(document).ready(function(){
+			   $('#register').attr('disabled','disabled');
+		   });
+		   }
+		   else if(document.getElementById("emailer").innerHTML=="Already registered"){
+			   $('#register').attr('disabled','disabled');
+		   }
+		   else if((document.getElementById("emailer").innerHTML=="Available")){
+			   $('#register').removeAttr('disabled');
+		   }
+		   }
+	   
+	   else{
+		   document.getElementById("passsuccess").innerHTML="";
+		   document.getElementById("passerror").innerHTML="password does not match";
+		   $('#register').attr('disabled','disabled');
+	   }
+   }
+   function loadEmail()
+   {
+	   var email=document.getElementById("email").value;
+	   var xmlhttp=new XMLHttpRequest();
+	   xmlhttp.onreadystatechange=function()
+	   {
+		   if (xmlhttp.readyState == 4) 
+			{
+				var jsonArray = JSON.parse(xmlhttp.responseText); 
+				//alert(JSON.stringify(jsonArray));
+				if(jsonArray.length > 0){
+					document.getElementById("emailer").innerHTML="Already registered";
+					if(document.getElementById("passerror").innerHTML=="" && document.getElementById("passsuccess").innerHTML==""){
+					$(document).ready(function(){
+						$('#register').attr('disabled','disabled');	
+						submitstat=1;
+					});
+					}
+					else if(document.getElementById("passerror").innerHTML=="password does not match"){
+						$('#register').attr('disabled','disabled');
+					}
+					else{
+						$('#register').attr('disabled','disabled');
+					}
+					
+					
+				}
+				else{
+					document.getElementById("emailer").innerHTML="Available";
+					if(document.getElementById("passerror").innerHTML=="password does not match"){
+						$('#register').attr('disabled','disabled');
+					}
+					else if(document.getElementById("passerror").innerHTML=="" && document.getElementById("passsuccess").innerHTML==""){
+							$('#register').attr('disabled','disabled');	
+						}
+					else if(document.getElementById("passsuccess").innerHTML=="password match"){
+					$('#register').removeAttr('disabled');
+					
+				}
+			}
+		}
+  }
+	   xmlhttp.open("get","${pageContext.request.contextPath}/regController?flag=loadEmail&email="+email, true)
+		xmlhttp.send();
+   }
+   function loadCity() 
+  	{
+	   var state=document.getElementById("state");	
+		var xmlhttp = new XMLHttpRequest();
+		
+		removeAllCity();
+		
+		xmlhttp.onreadystatechange = function()
+		{
+			if (xmlhttp.readyState == 4) 
+			{
+				var jsonArray = JSON.parse(xmlhttp.responseText);
+				
+				for(var i=0; i<jsonArray.length ; i++)
+				{
+					var createOption=document.createElement("option");
+					
+					createOption.value=jsonArray[i].cid;
+					createOption.text=jsonArray[i].cityName;
+					document.basicForm.city.options.add(createOption);
+				}
+			}
+		}
+		
+		xmlhttp.open("get","${pageContext.request.contextPath}/regController?flag=loadCity&stateId="+state.value, true)
+		xmlhttp.send();
+		/* jQuery(".chosen-select1").chosen({'width':'100%','white-space':'nowrap'}); */
+		/* Holds the status of the XMLHttpRequest. Changes from 0 to 4:
+			0: request not initialized
+			1: server connection established
+			2: request received
+			3: processing request
+			4: request finished and response is ready */
+	}
+  
+  	function removeAllCity() {
+  		var removeCity=document.basicForm.city.options.length;
+		for(i=removeCity ; i>0 ; i-- )
+		{
+			document.basicForm.city.remove(i);
+		}
+	}
+   
+   function loadState() 
+   	{
+		var country=document.getElementById("country");	
+		var xmlhttp = new XMLHttpRequest();
+		
+		removeAllState();
+		removeAllCity();
+		
+		xmlhttp.onreadystatechange = function()
+		{
+			if (xmlhttp.readyState == 4) 
+			{
+				var jsonArray = JSON.parse(xmlhttp.responseText);
+				
+				for(var i=0; i<jsonArray.length ; i++)
+				{
+					var createOption=document.createElement("option");
+					
+					createOption.value=jsonArray[i].stateId;
+					createOption.text=jsonArray[i].stateName;
+					document.basicForm.state.options.add(createOption);
+				}
+			}
+		}
+		
+		xmlhttp.open("get","${pageContext.request.contextPath}/regController?flag=loadState&countryId="+country.value, true)
+		xmlhttp.send();
+		/* jQuery(".chosen-select1").chosen({'width':'100%','white-space':'nowrap'}); */
+		/* Holds the status of the XMLHttpRequest. Changes from 0 to 4:
+			0: request not initialized
+			1: server connection established
+			2: request received
+			3: processing request
+			4: request finished and response is ready */
+	}
+   
+   	function removeAllState() {
+   		var removeState=document.basicForm.state.options.length;
+		for(i=removeState ; i>0 ; i-- )
+		{
+			document.basicForm.state.remove(i);
+		}
+	}
+   </script>
 </head>
 <body>
 <!--======= Side Navigation =======-->
@@ -105,7 +267,7 @@
           <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
             <div class="box-style cont-pad">
              
-                <form id="basicForm" action="<%=request.getContextPath()%>/regController" method="post" class="form-horizontal">
+                <form id="basicForm" name="basicForm" action="<%=request.getContextPath()%>/regController" method="post" class="form-horizontal">
  
                   
     <div class="form-group">
@@ -125,21 +287,24 @@
                    <div class="form-group">
                     <label class="col-sm-3 control-label">Email <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <input type="text" name="email" class="form-control" placeholder="Enter your User name..." required />
+                      <input type="email" name="email" id="email" class="form-control" onchange="loadEmail()" placeholder="Enter your User name..." required />
+                   <label class="text-danger" id="emailer"></label>
                     </div> 
                   </div>       
                   
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Password<span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <input type="password" name="password" class="form-control" placeholder="Enter your Password..." required />
+                      <input type="password" name="password" id="pass" class="form-control" placeholder="Enter your Password..." required />
                     </div> 
                   </div>     
                   
                    <div class="form-group">
                     <label class="col-sm-3 control-label">Confirm Password<span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                      <input type="password" name="confirmpassword" class="form-control" placeholder="Enter your Confirm Password..." required />
+                      <input type="password" name="confirmpassword" id="cpass" onchange="validate()" class="form-control" placeholder="Enter your Confirm Password..." required />
+                    	 <label class="text-danger" id="passerror"></label>
+                    	 <label class="text-success" id="passsuccess"></label>
                     </div> 
                   </div>    
                   
@@ -178,7 +343,7 @@
 										<select id="country" class="select2 select2-hidden-accessible"
 											required="" data-placeholder="Choose One" style="width: 100%"
 											name="country" aria-required="true" tabindex="-1"
-											aria-hidden="true">
+											aria-hidden="true" onchange="loadState()">
 											<option value="0">Select Country</option>
 											<c:forEach items="${sessionScope.countryList}" var="i">
 												<option value="${i.id}">${i.countryName}</option>
@@ -191,14 +356,14 @@
                   <div class="form-group">
                     <label class="col-sm-3 control-label">State Name <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-										<select id="country" class="select2 select2-hidden-accessible"
+										<select id="state" class="select2 select2-hidden-accessible"
 											required="" data-placeholder="Choose One" style="width: 100%"
 											name="state" aria-required="true" tabindex="-1"
-											aria-hidden="true">
+											aria-hidden="true" onchange="loadCity()">
 											<option value="0">Select State</option>
-											<c:forEach items="${sessionScope.stateList}" var="i">
-												<option value="${i.stateId}">${i.stateName}</option>
-											</c:forEach>
+<%-- 											<c:forEach items="${sessionScope.loadStateList}" var="i"> --%>
+<%-- 												<option value="${i.stateId}">${i.stateName}</option> --%>
+<%-- 											</c:forEach> --%>
 										</select> <label class="error" for="state"></label>
     </div>
                   </div>
@@ -211,9 +376,9 @@
 											name="city" aria-required="true" tabindex="-1"
 											aria-hidden="true">
 											<option value="0">Select City</option>
-											<c:forEach items="${sessionScope.cityList}" var="i">
-												<option value="${i.cid}">${i.cityName}</option>
-											</c:forEach>
+<%-- 											<c:forEach items="${sessionScope.cityList}" var="i"> --%>
+<%-- 												<option value="${i.cid}">${i.cityName}</option> --%>
+<%-- 											</c:forEach> --%>
 										</select> <label class="error" for="state"></label>
     </div>
                   </div>
@@ -238,7 +403,7 @@
 
                   <div class="row">
                     <div class="col-sm-9 col-sm-offset-3">
-                      <button class="btn btn-success btn-quirk btn-wide mr5">Submit</button>
+                      <button class="btn btn-success btn-quirk btn-wide mr5" name="register" id="register" disabled="disabled">Submit</button>
                       <input type="hidden" name="flag" value="InsertUser">
                       <button type="reset" class="btn btn-quirk btn-wide btn-default">Reset</button>
                     </div>

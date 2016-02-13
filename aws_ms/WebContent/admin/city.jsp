@@ -5,6 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="${pageContext.request.contextPath}/admin/">
 <%-- <base href="${pageContext.request.contextPath}/admin"> --%>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <meta charset="utf-8">
@@ -41,7 +42,7 @@
 			if (xmlhttp.readyState == 4) 
 			{
 				var jsonObj = JSON.parse(xmlhttp.responseText);
-				alert(JSON.stringify(jsonObj));
+				
 				for(i=0 ; i<jsonObj.length ; i++)
 				{
 					var createOption=document.createElement("option");
@@ -57,7 +58,7 @@
 			
 		}
 
-		xmlhttp.open("get", "${pageContext.request.contextPath}/CityController?flag=searchState&countryId="+country.value, true);
+		xmlhttp.open("get", "${pageContext.request.contextPath}/CityController?flag=loadState&countryId="+country.value, true);
 		xmlhttp.send();
 		/* jQuery(".chosen-select1").chosen({'width':'100%','white-space':'nowrap'}); */
 		/* Holds the status of the XMLHttpRequest. Changes from 0 to 4:
@@ -93,8 +94,8 @@
     <div class="contentpanel">
 
       <ol class="breadcrumb breadcrumb-quirk">
-        <li><a href="index.html"><i class="fa fa-home mr5"></i> Home</a></li>
-        <li><a href="general-forms.html">Forms</a></li>
+        <li><a href="index.jsp"><i class="fa fa-home mr5"></i> Home</a></li>
+       
         <li class="active">City</li>
       </ol>
 
@@ -129,7 +130,7 @@
         <select  class="select2 select2-hidden-accessible" required="" data-placeholder="Choose One" style="width: 100%" name="state" id="state" aria-required="true" tabindex="-1" aria-hidden="true">
      <option value="">Choose One</option>
 <%-- 											<c:forEach items="${sessionScope.stateList}" var="i"> --%>
-<%-- 												<option value="${i.stateId}">${i.stateName}</option> --%>
+												<option value="">choose state</option>
 												
 <%-- 												<c:remove var="stateList" scope="session" /> --%>
 <%-- 											</c:forEach>--%></select> 

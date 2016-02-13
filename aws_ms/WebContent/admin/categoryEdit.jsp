@@ -5,13 +5,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
+<base href="${pageContext.request.contextPath}/admin/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
   <!--<link rel="shortcut icon" href="../images/favicon.png" type="image/png">-->
 
-  <title>Add Category</title>
+  <title>Edit Category</title>
 
   <link rel="stylesheet" href="css/font-awesome.css">
   <link rel="stylesheet" href="css/weather-icons.css">
@@ -43,7 +44,7 @@
 
       <ol class="breadcrumb breadcrumb-quirk">
         <li><a href="index.jsp"><i class="fa fa-home mr5"></i> Home</a></li>
-        <li><a href="general-forms.html">Forms</a></li>
+        
         <li class="active">Category</li>
       </ol>
 
@@ -52,7 +53,7 @@
         <div class="col-md-12">
           <div class="panel">
               <div class="panel-heading nopaddingbottom">
-                <h4 class="panel-title">EditCategory</h4>
+                <h4 class="panel-title">Edit Category</h4>
               </div>
               <div class="panel-body">
                 <hr>
